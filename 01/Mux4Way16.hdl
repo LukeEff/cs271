@@ -16,5 +16,71 @@ CHIP Mux4Way16 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+     
+    Mux(a=a[0], b=b[0], sel=sel[0], out=firstab); 
+    Mux(a=c[0], b=d[0], sel=sel[0], out=firstcd);
+    
+    Mux(a=a[1], b=b[1], sel=sel[0], out=secondab);
+    Mux(a=c[1], b=d[1], sel=sel[0], out=secondcd);
+
+    Mux(a=a[2], b=b[2], sel=sel[0], out=thirdab);
+    Mux(a=c[2], b=d[2], sel=sel[0], out=thirdcd);
+
+    Mux(a=a[3], b=b[3], sel=sel[0], out=fourthab);
+    Mux(a=c[3], b=d[3], sel=sel[0], out=fourthcd);
+
+    Mux(a=a[4], b=b[4], sel=sel[0], out=fifthab); 
+    Mux(a=c[4], b=d[4], sel=sel[0], out=fifthcd);
+
+    Mux(a=a[5], b=b[5], sel=sel[0], out=sixthab); 
+    Mux(a=c[5], b=d[5], sel=sel[0], out=sixthcd);
+
+    Mux(a=a[6], b=b[6], sel=sel[0], out=seventhab);
+    Mux(a=c[6], b=d[6], sel=sel[0], out=seventhcd);
+
+    Mux(a=a[7], b=b[7], sel=sel[0], out=eigthab); 
+    Mux(a=c[7], b=d[7], sel=sel[0], out=eigthcd);
+
+    Mux(a=a[8], b=b[8], sel=sel[0], out=ninthab); 
+    Mux(a=c[8], b=d[8], sel=sel[0], out=ninthcd);
+
+    Mux(a=a[9], b=b[9], sel=sel[0], out=tenthab); 
+    Mux(a=c[9], b=d[9], sel=sel[0], out=tenthcd);
+
+    Mux(a=a[10], b=b[10], sel=sel[0], out=eleventhab); 
+    Mux(a=c[10], b=d[10], sel=sel[0], out=eleventhcd);
+
+    Mux(a=a[11], b=b[11], sel=sel[0], out=twelvethab); 
+    Mux(a=c[11], b=d[11], sel=sel[0], out=twelvethcd);
+
+    Mux(a=a[12], b=b[12], sel=sel[0], out=thirteenthab); 
+    Mux(a=c[12], b=d[12], sel=sel[0], out=thirteenthcd);
+
+    Mux(a=a[13], b=b[13], sel=sel[0], out=fourteenthab);
+    Mux(a=c[13], b=d[13], sel=sel[0], out=fourteenthcd);
+
+    Mux(a=a[14], b=b[14], sel=sel[0], out=fifteenthab);
+    Mux(a=c[14], b=d[14], sel=sel[0], out=fifteenthcd);
+
+    Mux(a=a[15], b=b[15], sel=sel[0], out=sixteenthab);
+    Mux(a=c[15], b=d[15], sel=sel[0], out=sixteenthcd);
+
+    Mux(a=firstab, b=firstcd, sel=sel[1], out=out[0]);
+    Mux(a=secondab, b=secondcd, sel=sel[1], out=out[1]);
+    Mux(a=thirdab, b=thirdcd, sel=sel[1], out=out[2]);
+    Mux(a=fourthab, b=fourthcd, sel=sel[1], out=out[3]);
+    Mux(a=fifthab, b=fifthcd, sel=sel[1], out=out[4]);
+    Mux(a=sixthab, b=sixthcd, sel=sel[1], out=out[5]);
+    Mux(a=seventhab, b=seventhcd, sel=sel[1], out=out[6]);
+    Mux(a=eigthab, b=eigthcd, sel=sel[1], out=out[7]);
+    Mux(a=ninthab, b=ninthcd, sel=sel[1], out=out[8]);
+    Mux(a=tenthab, b=tenthcd, sel=sel[1], out=out[9]);
+    Mux(a=eleventhab, b=eleventhcd, sel=sel[1], out=out[10]);
+    Mux(a=twelvethab, b=twelvethcd, sel=sel[1], out=out[11]);
+    Mux(a=thirteenthab, b=thirteenthcd, sel=sel[1], out=out[12]);
+    Mux(a=fourteenthab, b=fourteenthcd, sel=sel[1], out=out[13]);
+    Mux(a=fifteenthab, b=fifteenthcd, sel=sel[1], out=out[14]);
+    Mux(a=sixteenthab, b=sixteenthcd, sel=sel[1], out=out[15]);
+
+
 }
