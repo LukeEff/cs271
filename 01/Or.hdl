@@ -8,11 +8,14 @@
  * out = 1 if (a == 1 or b == 1)
  *       0 otherwise
  */
-
+ 
 CHIP Or {
     IN a, b;
     OUT out;
 
     PARTS:
-    // Put your code here:
+    Not(in=a, out=notA);
+    Not(in=b, out=notB);
+    And(a=notA, b=notB, out=notAandB);
+    Not(in=notAandB, out=out);    
 }
