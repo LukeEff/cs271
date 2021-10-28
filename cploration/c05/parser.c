@@ -9,18 +9,19 @@ void parse(FILE * file) {
   
    while (fgets(line, sizeof(line), file)) {
      strip(line);
-     if (*line == NULL) {
+     if (!*line) {
        continue;
      }
      char inst_type = '\0';
      if (is_Atype(line)) {
-        inst_type = 'A';
+       inst_type = 'A';
      }  else if (is_Ctype(line)) {
        inst_type = 'C';
      }  else if (is_label(line)) {
-        inst_type = 'L';
+       inst_type = 'L';
      }     
      printf("%c  %s\n", inst_type, line);
+     
    }
 }
 
@@ -38,3 +39,17 @@ char *strip(char *s) {
   strcpy(s,s_new);
   return s;
 }
+
+bool is_Atype(const char *line) {
+  return line[0] == '@';
+}
+
+bool is_label(const char *line) {
+  int size = strlen(line);
+  return (line[0] == '(') && (line[size - 1] == ')');
+}
+
+bool is_Ctype(const char *line) {
+  return !(is_Atype(line) || is_label(line));
+}
+
