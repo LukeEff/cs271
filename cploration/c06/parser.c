@@ -19,6 +19,10 @@ void parse(FILE * file) {
        inst_type = 'C';
      }  else if (is_label(line)) {
        inst_type = 'L';
+       char *new_label[strlen(line)];
+       extract_label(line, new_label);
+       printf("%c  %s\n", inst_type, new_label);
+       continue;
      }     
      printf("%c  %s\n", inst_type, line);
      
@@ -53,3 +57,7 @@ bool is_Ctype(const char *line) {
   return !(is_Atype(line) || is_label(line));
 }
 
+char *extract_label(const char *line, char* label) {
+  strncpy(label, line + 1, strlen(line) - 2);
+  return label;
+}
