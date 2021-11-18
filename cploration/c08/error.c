@@ -5,6 +5,7 @@
 const char *error_messages[] = 
 {
   [EXIT_INCORRECT_ARGUMENTS] = "Usage: %s [filename]",
+  [EXIT_CANNOT_OPEN_FILE] = "Cannot open file %s",
 };
 
 void exit_program(enum exitcode code, ...)
