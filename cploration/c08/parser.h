@@ -1,3 +1,5 @@
+#ifndef __SYMTABLE_H__
+#define __SYMTABLE_H__
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -51,3 +53,5 @@ bool is_label(const char*);
 bool is_Ctype(const char*);
 
 char *extract_label(const char *line, char* label);
+
+#endif
