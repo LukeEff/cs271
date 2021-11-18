@@ -2,14 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const char *error_messages[] = 
-{
+const char *error_messages[] = {
   [EXIT_INCORRECT_ARGUMENTS] = "Usage: %s [filename]",
   [EXIT_CANNOT_OPEN_FILE] = "Cannot open file %s",
+  [EXIT_TOO_MANY_INSTRUCTIONS] = "File contains more than the maximum of %u instructions",
 };
 
-void exit_program(enum exitcode code, ...)
-{
+void exit_program(enum exitcode code, ...) {
   va_list arguments;
   va_start(arguments, code);
 
