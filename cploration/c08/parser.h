@@ -11,8 +11,8 @@
 #define MAX_LINE_LENGTH 200
 #define MAX_LABEL_LENGTH MAX_LINE_LENGTH - 2
 #define MAX_HACK_ADDRESS INT16_MAX
-#define MAX_INSTRUCTIONS MAX_HACK_ADDRESS
-
+#define MAX_INSTRUCTIONS MAX_HACK_ADDRESS // use this when not testing
+//#define MAX_INSTRUCTIONS 1 // use this for testing
 typedef int16_t hack_addr;
 typedef int16_t opcode;
 

@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -I.
 LDFLAGS =
-OBJFILES = main.o parser.o
+OBJFILES = main.o parser.o symtable.o error.o  
 TARGET = main
 
 all: $(TARGET)
