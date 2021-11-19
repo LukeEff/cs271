@@ -31,6 +31,8 @@ void parse(FILE * file) {
        } else if (symtable_find(line) == NULL) {
           exit_program(EXIT_SYMBOL_ALREADY_EXISTS, line_num, line);
        }
+       symtable_insert(line, instr_num);
+       continue;
        inst_type = 'L';
        char new_label[MAX_LABEL_LENGTH];
        extract_label(line, new_label);
