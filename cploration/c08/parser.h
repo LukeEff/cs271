@@ -1,11 +1,12 @@
-#ifndef __SYMTABLE_H__
-#define __SYMTABLE_H__
+#ifndef __PARSER_H__
+#define __PARSER_H__
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "symtable.h"
 
 #define MAX_LINE_LENGTH 200
 #define MAX_LABEL_LENGTH MAX_LINE_LENGTH - 2

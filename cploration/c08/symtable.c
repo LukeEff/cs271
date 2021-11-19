@@ -42,7 +42,6 @@ struct Symbol *symtable_find(char * key) {
       //wrap around the table
       hashIndex %= SYMBOL_TABLE_SIZE;
    }        
-	
    return NULL;        
 }
 

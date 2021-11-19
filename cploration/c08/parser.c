@@ -1,5 +1,6 @@
 #include "parser.h"
 #include "error.h"
+#include "symtable.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -25,6 +26,11 @@ void parse(FILE * file) {
      }  else if (is_Ctype(line)) {
        inst_type = 'C';
      }  else if (is_label(line)) {
+       if (isalpha(line[0])) {
+         exit_program(EXIT_INVALID_LABEL, line_num, line);
+       } else if (symtable_find(line) == NULL) {
+          exit_program(EXIT_SYMBOL_ALREADY_EXISTS, line_num, line);
+       }
        inst_type = 'L';
        char new_label[MAX_LABEL_LENGTH];
        extract_label(line, new_label);
