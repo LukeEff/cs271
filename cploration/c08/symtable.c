@@ -1,7 +1,7 @@
 #include "symtable.h"
 #include <stdio.h>
 
-struct Symbol* hashArray[SYMBOL_TABLE_SIZE];
+struct Symbol* hashArray[SYMBOL_TABLE_SIZE] = { NULL };
 struct Symbol* item;
 
 void symtable_display_table() {
@@ -22,18 +22,17 @@ unsigned int hashCode(char * key)  {
   unsigned int hash = 5381;
   int c;
   while ((c = *key++))
-    hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    hash = ((hash << 5) + hash) + c;
   return hash % SYMBOL_TABLE_SIZE;
 }
+
 
 struct Symbol *symtable_find(char * key) {
    //get the hash 
    int hashIndex = hashCode(key);  
-	
    //move in array until an empty 
    while(hashArray[hashIndex] != NULL) {
-	
-      if(hashArray[hashIndex]->name == key)
+      if(hashArray[hashIndex]->name == key) 
          return hashArray[hashIndex]; 
 			
       //go to next cell
@@ -62,6 +61,5 @@ void symtable_insert(char* key, hack_addr addr) {
       //wrap around the table
       hashIndex %= SYMBOL_TABLE_SIZE;
    }
-	
-   hashArray[hashIndex] = item;
+    hashArray[hashIndex] = item;
 }
