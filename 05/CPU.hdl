@@ -25,6 +25,12 @@
  * than to the address resulting from executing the current instruction. 
  */
 
+/* Thank you, Paul K.
+a-instruction=[0, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v]
+c-instruction=[1, 1, 1, a, c, c, c, c, c, c, d, d, d, j, j, j]
+               15 14 13 12 11 10 9  8  7  6  5  4  3  2  1  0
+*/
+
 CHIP CPU {
 
     IN  inM[16],         // M value input  (M = contents of RAM[A])
@@ -38,7 +44,54 @@ CHIP CPU {
         addressM[15],    // Address in data memory (of M)
         pc[15];          // address of next instruction
 
-    PARTS:
-    // Put your code here:
+    PARTS: 
 
+    // Instruction type
+    Not(in=instruction[15], out=notFirstBit); // first bit we check
+    Mux16(a=ainstruction, b=instruction, sel=notFirstBit, out=i);
+    
+    // A register
+    Or(a=notFirstBit, b=instruction[5], out=destinationA);
+    ARegister(in=i, load=destinationA, out=A, out[0..14]=addressM);
+
+    // Use A or M for ALU
+    And(a=instruction[15], b=instruction[12], out=ALUcompAorM);
+    Mux16(a=A, b=inM, sel=ALUcompAorM, out=AorInM);
+    
+    // D register
+    And(a=instruction[15], b=instruction[4], out=destinationD);
+    DRegister(in=ainstruction, load=destinationD, out=D);
+
+    // ALU 
+    // x is CPU-resident register D
+    // y is the value of the memory location addressed by Memory[A]
+    ALU(x=D, y=AorInM, zx=instruction[11], nx=instruction[10],
+    zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6],
+    out=ainstruction, out=outM, zr=zr, ng=ng);
+
+    // Write m
+    And(a=instruction[15], b=instruction[3], out=writeM);
+
+    // ALU output positive
+    Not(in=ng, out=notNegative);
+    Not(in=zr, out=notZero);
+    And(a=notNegative, b=notZero, out=positiveNum);
+
+    // Jump greater than 0
+    And(a=instruction[15], b=instruction[0], out=jgt);
+    And(a=jgt, b=positiveNum, out=loadjgt);
+
+    // Jump equal to 0
+    And(a=instruction[15], b=instruction[1], out=jeq);
+    And(a=jeq, b=zr, out=loadjeq);
+
+    // Jump less than 0
+    And(a=instruction[15], b=instruction[2], out=jlt);
+    And(a=jlt, b=ng, out=loadjlt);
+
+    // Should jump be loaded
+    Or8Way(in[0]=loadjgt, in[1]=loadjeq, in[2]=loadjlt, in[3..7]=false, out=loadJump);
+
+    // Next instuction evaluated
+    PC(in=A, load=loadJump, inc=true, reset=reset, out[0..14]=pc);
 }
