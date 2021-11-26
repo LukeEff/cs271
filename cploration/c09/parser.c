@@ -86,3 +86,22 @@ void add_predefined_symbols() {
     symtable_insert(symbol.name, symbol.address);
   }
 }
+
+bool parse_A_instruction(const char *line, a_instruction *instr) {
+  char *s = (char*) malloc(strlen(line));
+  strcpy(s, line + 1);
+  char *s_end = NULL;
+  long result = strtol(s, &s_end, 10);
+
+  if (s == s_end) {
+    instr->label = (char*) malloc(strlen(line));
+    strcpy(instr->label, s);
+    instr->is_addr = false;
+  } else if (*s_end != 0) {
+    return false;
+  } else {
+    instr->address = result;
+    instr->is_addr = true;
+  }
+  return true;
+}
