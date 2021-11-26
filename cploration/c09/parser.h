@@ -60,4 +60,6 @@ char *extract_label(const char *line, char* label);
 
 void add_predefined_symbols();
 
+bool parse_A_instruction(const char *line, a_instruction *instr);
+
 #endif

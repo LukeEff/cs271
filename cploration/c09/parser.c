@@ -8,23 +8,27 @@
 
 void parse(FILE * file) {
   char line[MAX_LINE_LENGTH] = {0};
-  
+  instruction instr; 
   unsigned int line_num = 0;
   unsigned int instr_num = 0; 
   add_predefined_symbols();
-  symtable_display_table();
   while (fgets(line, sizeof(line), file)) {
+
     line_num = line_num + 1;
     if (instr_num > MAX_INSTRUCTIONS) {
       exit_program(EXIT_TOO_MANY_INSTRUCTIONS, MAX_INSTRUCTIONS + 1);
     }
-     strip(line);
-     if (!*line) {
-       continue;
-     }
-     char inst_type = '\0';
-     if (is_Atype(line)) {
-       inst_type = 'A';
+    strip(line);
+    if (!*line) {
+      continue;
+    }
+    char inst_type = '\0';
+    if (is_Atype(line)) {
+      inst_type = 'A';
+      if (!parse_A_instruction(line, &instr.a_instr)){
+        exit_program(EXIT_INVALID_A_INSTR, line_num, line);
+      }
+      instr.instr_type = A_TYPE;
      }  else if (is_Ctype(line)) {
        inst_type = 'C';
      }  else if (is_label(line)) {

@@ -50,7 +50,6 @@ void symtable_insert(char* key, hack_addr addr) {
    item->address = addr;  
    item->name = (char*) malloc(strlen(key) + 1);
    strcpy(item->name, key);
-
    //get the hash 
    int hashIndex = hashCode(key);
 
