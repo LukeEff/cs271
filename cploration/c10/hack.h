@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdint.h>
-
+#include <string.h>
 #define NUM_PREDEFINED_SYMBOLS 23
 
 typedef enum symbol_id {
@@ -116,3 +116,24 @@ static const predefined_symbol predefined_symbols[NUM_PREDEFINED_SYMBOLS] = {
   {"KBD", SYM_KBD},
 };
 
+static inline jump_id str_to_jumpid(const char *s) {
+  jump_id id = JMP_INVALID;
+  if (s == NULL) {
+    id = JMP_NULL;
+  } else if (strcmp(s, "JGT")) {
+    id = JGT;
+  } else if (strcmp(s, "JEQ")) {
+    id = JEQ;
+  } else if (strcmp(s, "JGE")) {
+    id = JGE;
+  } else if (strcmp(s, "JLT")) {
+    id = JLT;
+  } else if (strcmp(s, "JNE")) {
+    id = JNE;
+  } else if (strcmp(s, "JLE")) {
+    id = JLE;
+  } else if (strcmp(s, "JMP")) {
+    id = JMP;
+  }
+  return id;
+}
