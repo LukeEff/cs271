@@ -32,14 +32,26 @@ typedef enum symbol_id {
 typedef enum jump_id {
   JMP_INVALID = -1,
   JMP_NULL,
-  JMP_GT,
-  JMP_EQ,
-  JMP_GE,
-  JMP_LT,
-  JMP_NE,
-  JMP_LE,
+  JGT,
+  JEQ,
+  JGE,
+  JLT,
+  JNE,
+  JLE,
   JMP,
 } jump_id;
+
+typedef enum dest_id {
+  DEST_INVALID = -1,
+  DEST_NULL,
+  M,
+  D,
+  MD,
+  A,
+  AM,
+  AD,
+  AMD,
+} dest_id;
 
 typedef struct {
   char name[10];
