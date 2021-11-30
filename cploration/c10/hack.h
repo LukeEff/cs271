@@ -53,6 +53,38 @@ typedef enum dest_id {
   AMD,
 } dest_id;
 
+typedef enum comp_id {
+  COMP_INVALID = -1,
+  COMP_0 = 42,
+  COMP_1 = 63,
+  COMP_neg1 = 58,
+  COMP_D = 12,
+  COMP_A = 48,
+  COMP_notD = 13,
+  COMP_notA = 49,
+  COMP_negD = 15,
+  COMP_negA = 51,
+  COMP_Dplus1 = 31,
+  COMP_Aplus1 = 55,
+  COMP_Dminus1 = 14,
+  COMP_Aminus1 = 50,
+  COMP_DplusA = 2,
+  COMP_DminusA = 19,
+  COMP_AminusD = 7,
+  COMP_DandA = 0,
+  COMP_DorA = 21,
+  COMP_M = 64 + COMP_A,
+  COMP_notM = 64 + COMP_notA,
+  COMP_negM = 64 + COMP_negA,
+  COMP_Mplus1 = 64 + COMP_Aplus1,
+  COMP_Mminus1 = 64 + COMP_Aminus1,
+  COMP_DplusM =  64 + COMP_DplusA,
+  COMP_DminusM = 64 + COMP_DminusA,
+  COMP_MminusD = 64 + COMP_AminusD,
+  COMP_DandM = 64 + COMP_DandA,
+  COMP_DorM = 64 + COMP_DorA,
+} comp_id;
+
 typedef struct {
   char name[10];
   int16_t address;
