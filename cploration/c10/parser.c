@@ -60,8 +60,8 @@ char *strip(char *s) {
     } else if (!isspace(*s2)) {
       s_new[i++] = *s2;
     }
-    s_new[i] = '\0';
   }
+  s_new[i] = '\0';
   strcpy(s,s_new);
   return s;
 }
