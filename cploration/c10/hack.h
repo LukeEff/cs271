@@ -137,3 +137,23 @@ static inline jump_id str_to_jumpid(const char *s) {
   }
   return id;
 }
+
+static inline dest_id str_to_destid(const char *s) {
+  dest_id id = DEST_INVALID;
+  if (s == NULL) {
+    id = DEST_NULL; 
+  } else if (strcmp(s, "M")) {
+    id = M;
+  } else if (strcmp(s, "MD")) {
+    id = MD;
+  } else if (strcmp(s, "A")) {
+    id = A;
+  } else if (strcmp(s, "AM")) {
+    id = AM;
+  } else if (strcmp(s, "AD")) {
+    id = AD;
+  } else if (strcmp(s, "AMD")) {
+    id = AMD;
+  }
+  return id;
+}
