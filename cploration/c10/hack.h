@@ -157,3 +157,69 @@ static inline dest_id str_to_destid(const char *s) {
   }
   return id;
 }
+
+static inline comp_id str_to_compid(const char *s) {
+  comp_id id = COMP_INVALID;
+  if (strcmp(s, "0")) {
+    id = COMP_0;
+  } else if (strcmp(s, "1")) {
+    id = COMP_1;
+  } else if (strcmp(s, "-1")) {
+    id = COMP_neg1;
+  } else if (strcmp(s, "D")) {
+    id = COMP_D;
+  } else if (strcmp(s, "A")) {
+    id = COMP_A;
+  } else if (strcmp(s, "!D")) {
+    id = COMP_notD;
+  } else if (strcmp(s, "!A")) {
+    id = COMP_notA;
+  } else if (strcmp(s, "-D")) {
+    id = COMP_negD;
+  } else if (strcmp(s, "-A")) {
+    id = COMP_negA;
+  } else if (strcmp(s, "D+1")) {
+    id = COMP_Dplus1;
+  } else if (strcmp(s, "A+1")) {
+    id = COMP_Aplus1;
+  } else if (strcmp(s, "D-1")) {
+    id = COMP_Dminus1;
+  } else if (strcmp(s, "A-1")) {
+    id = COMP_Aminus1;
+  } else if (strcmp(s, "D+A")) {
+    id = COMP_DplusA;
+  } else if (strcmp(s, "D-A")) {
+    id = COMP_DminusA;
+  } else if (strcmp(s, "A-D")) {
+    id = COMP_AminusD;
+  } else if (strcmp(s, "D&A")) {
+    id = COMP_DandA;
+  } else if (strcmp(s, "D|A")) {
+    id = COMP_DorA;
+  } else if (strcmp(s, "M")) {
+    id = COMP_M;
+  } else if (strcmp(s, "!M")) {
+    id = COMP_notM;
+  } else if (strcmp(s, "-M")) {
+    id = COMP_negM;
+  } else if (strcmp(s, "M-1")) {
+    id = COMP_Mminus1;
+  } else if (strcmp(s, "D+M")) {
+    id = COMP_DplusM;
+  } else if (strcmp(s, "D-M")) {
+    id = COMP_DminusM;
+  } else if (strcmp(s, "M-D")) {
+    id = COMP_MminusD;
+  } else if (strcmp(s, "D&M")) {
+    id = COMP_DandM;
+  } else if (strcmp(s, "D|M")) {
+    id = COMP_DorM;
+  }
+
+
+
+  return id;
+}
+
+
+
