@@ -6,7 +6,8 @@
 #include <ctype.h>
 #include <string.h>
 
-void parse(FILE * file) {
+// Author: Luke Fernandez
+int parse(FILE * file, instruction *instructions) {
   char line[MAX_LINE_LENGTH] = {0};
   instruction instr; 
   unsigned int line_num = 0;
@@ -31,6 +32,21 @@ void parse(FILE * file) {
       instr.instr_type = A_TYPE;
      }  else if (is_Ctype(line)) {
        inst_type = 'C';
+        
+       char tmp_line[MAX_LINE_LENGTH] = {0};
+       strcpy(tmp_line, line);
+       parse_C_instruction(tmp_line, &instr.c_instr);
+      
+       if (instr.c_instr.comp == COMP_INVALID) {
+         exit_program(EXIT_INVALID_C_COMP);
+       } else if (instr.c_instr.dest == DEST_INVALID) {
+         exit_program(EXIT_INVALID_C_DEST);
+       } else if (instr.c_instr.jump == JMP_INVALID) {
+         exit_program(EXIT_INVALID_C_JUMP);
+       }
+
+       instr.instr_type = C_TYPE;
+
      }  else if (is_label(line)) {
        if (isalpha(line[0])) {
          exit_program(EXIT_INVALID_LABEL, line_num, line);
@@ -47,8 +63,9 @@ void parse(FILE * file) {
        continue;
      }     
      printf("%c  %s\n", inst_type, line);
-     instr_num = instr_num + 1;
+     instructions[instr_num++] = instr;
    }
+  return instr_num;
 }
 
 char *strip(char *s) {
@@ -108,4 +125,35 @@ bool parse_A_instruction(const char *line, a_instruction *instr) {
     instr->is_addr = true;
   }
   return true;
+}
+
+void parse_C_instruction(char *line, c_instruction *instr) {
+  //comp
+  //dest=comp
+  //comp;jump
+  //dest=comp;jump
+  printf("Original:%s\n", line);
+  char *temp = strtok(line, ";"); // everything up to first ;
+  
+  printf("Temp:%s\n", temp);
+  char *jump = strtok(NULL, ";"); // the jump itself, if not null
+
+  printf("Jump:%s\n", jump);
+  char *dest = strtok(temp, "="); // dest (or comp if no = sign in expression)
+  printf("Dest:%s\n", dest);
+  char *comp = strtok(NULL, "="); // comp (or null if no = sign in expression)
+  printf("Comp:%s\n\n", comp);
+  
+  if (comp == NULL) {
+    comp = dest;
+    dest = NULL;
+    printf("Switching comp and dest...\n");
+    printf("Comp:%s\n", comp);
+    printf("Dest:%s\n\n", dest);
+  }
+
+  instr->comp = str_to_compid(comp);
+  instr->jump = str_to_jumpid(jump);
+  instr->dest = str_to_destid(dest);
+  instr->a = (instr->comp >= 64) ? 1 : 0; 
 }

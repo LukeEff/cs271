@@ -1,6 +1,9 @@
 #include <string.h>
 #include <stdint.h>
 #include <string.h>
+
+#include <stdio.h>
+
 #define NUM_PREDEFINED_SYMBOLS 23
 
 typedef enum symbol_id {
@@ -118,23 +121,25 @@ static const predefined_symbol predefined_symbols[NUM_PREDEFINED_SYMBOLS] = {
 
 static inline jump_id str_to_jumpid(const char *s) {
   jump_id id = JMP_INVALID;
+  printf("Comparing:%s\n", s);
   if (s == NULL) {
     id = JMP_NULL;
-  } else if (strcmp(s, "JGT")) {
+  } else if (strcmp(s, "JGT") == 0) {
     id = JGT;
-  } else if (strcmp(s, "JEQ")) {
+  } else if (strcmp(s, "JEQ") == 0) {
     id = JEQ;
-  } else if (strcmp(s, "JGE")) {
+  } else if (strcmp(s, "JGE") == 0) {
     id = JGE;
-  } else if (strcmp(s, "JLT")) {
+  } else if (strcmp(s, "JLT") == 0) {
     id = JLT;
-  } else if (strcmp(s, "JNE")) {
+  } else if (strcmp(s, "JNE") == 0) {
     id = JNE;
-  } else if (strcmp(s, "JLE")) {
+  } else if (strcmp(s, "JLE") == 0) {
     id = JLE;
-  } else if (strcmp(s, "JMP")) {
+  } else if (strcmp(s, "JMP") == 0) {
     id = JMP;
   }
+  printf("Found:%d\n\n", id);
   return id;
 }
 
@@ -142,17 +147,19 @@ static inline dest_id str_to_destid(const char *s) {
   dest_id id = DEST_INVALID;
   if (s == NULL) {
     id = DEST_NULL; 
-  } else if (strcmp(s, "M")) {
+  } else if (strcmp(s, "M") == 0) {
     id = M;
-  } else if (strcmp(s, "MD")) {
+  } else if (strcmp(s, "D") == 0) {
+    id = D;
+  } else if (strcmp(s, "MD") == 0) {
     id = MD;
-  } else if (strcmp(s, "A")) {
+  } else if (strcmp(s, "A") == 0) {
     id = A;
-  } else if (strcmp(s, "AM")) {
+  } else if (strcmp(s, "AM") == 0) {
     id = AM;
-  } else if (strcmp(s, "AD")) {
+  } else if (strcmp(s, "AD") == 0) {
     id = AD;
-  } else if (strcmp(s, "AMD")) {
+  } else if (strcmp(s, "AMD") == 0) {
     id = AMD;
   }
   return id;
@@ -160,64 +167,61 @@ static inline dest_id str_to_destid(const char *s) {
 
 static inline comp_id str_to_compid(const char *s) {
   comp_id id = COMP_INVALID;
-  if (strcmp(s, "0")) {
+  if (strcmp(s, "0") == 0) {
     id = COMP_0;
-  } else if (strcmp(s, "1")) {
+  } else if (strcmp(s, "1") == 0) {
     id = COMP_1;
-  } else if (strcmp(s, "-1")) {
+  } else if (strcmp(s, "-1") == 0) {
     id = COMP_neg1;
-  } else if (strcmp(s, "D")) {
+  } else if (strcmp(s, "D") == 0) {
     id = COMP_D;
-  } else if (strcmp(s, "A")) {
+  } else if (strcmp(s, "A") == 0) {
     id = COMP_A;
-  } else if (strcmp(s, "!D")) {
+  } else if (strcmp(s, "!D") == 0) {
     id = COMP_notD;
-  } else if (strcmp(s, "!A")) {
+  } else if (strcmp(s, "!A") == 0) {
     id = COMP_notA;
-  } else if (strcmp(s, "-D")) {
+  } else if (strcmp(s, "-D") == 0) {
     id = COMP_negD;
-  } else if (strcmp(s, "-A")) {
+  } else if (strcmp(s, "-A") == 0) {
     id = COMP_negA;
-  } else if (strcmp(s, "D+1")) {
+  } else if (strcmp(s, "D+1") == 0) {
     id = COMP_Dplus1;
-  } else if (strcmp(s, "A+1")) {
+  } else if (strcmp(s, "A+1") == 0) {
     id = COMP_Aplus1;
-  } else if (strcmp(s, "D-1")) {
+  } else if (strcmp(s, "D-1") == 0) {
     id = COMP_Dminus1;
-  } else if (strcmp(s, "A-1")) {
+  } else if (strcmp(s, "A-1") == 0) {
     id = COMP_Aminus1;
-  } else if (strcmp(s, "D+A")) {
+  } else if (strcmp(s, "D+A") == 0) {
     id = COMP_DplusA;
-  } else if (strcmp(s, "D-A")) {
+  } else if (strcmp(s, "D-A") == 0) {
     id = COMP_DminusA;
-  } else if (strcmp(s, "A-D")) {
+  } else if (strcmp(s, "A-D") == 0) {
     id = COMP_AminusD;
-  } else if (strcmp(s, "D&A")) {
+  } else if (strcmp(s, "D&A") == 0) {
     id = COMP_DandA;
-  } else if (strcmp(s, "D|A")) {
+  } else if (strcmp(s, "D|A") == 0) {
     id = COMP_DorA;
-  } else if (strcmp(s, "M")) {
+  } else if (strcmp(s, "M") == 0) {
     id = COMP_M;
-  } else if (strcmp(s, "!M")) {
+  } else if (strcmp(s, "!M") == 0) {
     id = COMP_notM;
-  } else if (strcmp(s, "-M")) {
+  } else if (strcmp(s, "-M") == 0) {
     id = COMP_negM;
-  } else if (strcmp(s, "M-1")) {
+  } else if (strcmp(s, "M-1") == 0) {
     id = COMP_Mminus1;
-  } else if (strcmp(s, "D+M")) {
+  } else if (strcmp(s, "D+M") == 0) {
     id = COMP_DplusM;
-  } else if (strcmp(s, "D-M")) {
+  } else if (strcmp(s, "D-M") == 0) {
     id = COMP_DminusM;
-  } else if (strcmp(s, "M-D")) {
+  } else if (strcmp(s, "M-D") == 0) {
     id = COMP_MminusD;
-  } else if (strcmp(s, "D&M")) {
+  } else if (strcmp(s, "D&M") == 0) {
     id = COMP_DandM;
-  } else if (strcmp(s, "D|M")) {
+  } else if (strcmp(s, "D|M") == 0) {
     id = COMP_DorM;
   }
-
-
-
   return id;
 }
 

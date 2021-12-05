@@ -14,6 +14,7 @@
 #define MAX_HACK_ADDRESS INT16_MAX
 #define MAX_INSTRUCTIONS MAX_HACK_ADDRESS // use this when not testing
 //#define MAX_INSTRUCTIONS 1 // use this for testing
+// Author: Luke Fernandez
 typedef int16_t hack_addr;
 typedef int16_t opcode;
 
@@ -48,7 +49,7 @@ typedef struct instruction {
 
 char *strip(char *s);
 
-void parse(FILE * file);
+int parse(FILE * file, instruction *instructions);
 
 bool is_Atype(const char*);
 
@@ -61,5 +62,7 @@ char *extract_label(const char *line, char* label);
 void add_predefined_symbols();
 
 bool parse_A_instruction(const char *line, a_instruction *instr);
+
+void parse_C_instruction(char *line, c_instruction *instr);
 
 #endif
