@@ -158,3 +158,7 @@ void parse_C_instruction(char *line, c_instruction *instr) {
   instr->a = (*a == 0) ? 0x1 : 0x0; 
   //instr->a = *a;
 }
+
+void assemble(const char * file_name, instruction* instructions, int num_instructions) {
+
+}
