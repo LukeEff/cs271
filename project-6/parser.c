@@ -173,17 +173,17 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
       Symbol* entry = symtable_find(current.a_instr.label);
       if (entry == NULL) {
         int16_t nums = 16;
-        current_code = nums;
+        symtable_insert(current.a_instr.label, nums);
+        current_code = nums; 
       } else {
         current_code = entry->address;
       }
+      free(current.a_instr.label);
     } else if (current.a_instr.is_addr) {
-       
-    }
-    else if (current.instr_type == C_TYPE)} {
-      
+       current_code = current.a_instr.address;
+    } else if (current.instr_type == C_TYPE)} {
+      instruction_to_opcode();
     }
     printf("%c", current_code);
-  
-  
+    fclose(fw);
 }
