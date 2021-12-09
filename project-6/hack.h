@@ -22,7 +22,8 @@
   (opcode & 0x0008 ? '1' : '0'), \
   (opcode & 0x0004 ? '1' : '0'), \
   (opcode & 0x0002 ? '1' : '0'), \
-  (opcode & 0x0001 ? '1' : '0')
+  (opcode & 0x0001 ? '1' : '0') \
+
 
 typedef enum symbol_id {
   SYM_R0 = 0,
@@ -139,7 +140,6 @@ static const predefined_symbol predefined_symbols[NUM_PREDEFINED_SYMBOLS] = {
 
 static inline jump_id str_to_jumpid(const char *s) {
   jump_id id = JMP_INVALID;
-  printf("Comparing:%s\n", s);
   if (s == NULL) {
     id = JMP_NULL;
   } else if (strcmp(s, "JGT") == 0) {
@@ -157,7 +157,6 @@ static inline jump_id str_to_jumpid(const char *s) {
   } else if (strcmp(s, "JMP") == 0) {
     id = JMP;
   }
-  printf("Found:%d\n\n", id);
   return id;
 }
 

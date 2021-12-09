@@ -36,7 +36,6 @@ int parse(FILE * file, instruction *instructions) {
        char tmp_line[MAX_LINE_LENGTH] = {0};
        strcpy(tmp_line, line);
        parse_C_instruction(tmp_line, &instr.c_instr);
-       printf("Jump:%d\n\n", instr.c_instr.jump);
        if (instr.c_instr.comp == COMP_INVALID) {
          exit_program(EXIT_INVALID_C_COMP);
        } else if (instr.c_instr.dest == DEST_INVALID) {
@@ -132,35 +131,25 @@ void parse_C_instruction(char *line, c_instruction *instr) {
   //dest=comp
   //comp;jump
   //dest=comp;jump
-  //printf("Original:%s\n", line);
   char *temp = strtok(line, ";"); // everything up to first ;
-  
-  //printf("Temp:%s\n", temp);
   char *jump = strtok(NULL, ";"); // the jump itself, if not null
-
-  //printf("Jump:%s\n", jump);
   char *dest = strtok(temp, "="); // dest (or comp if no = sign in expression)
-  //printf("Dest:%s\n", dest);
   char *comp = strtok(NULL, "="); // comp (or null if no = sign in expression)
-  //printf("Comp:%s\n\n", comp);
   
   if (comp == NULL) {
     comp = dest;
     dest = NULL;
-    //printf("Switching comp and dest...\n");
-    //printf("Comp:%s\n", comp);
-    //printf("Dest:%s\n\n", dest);
   }
-  int *a = 0;
+
+  int *a = malloc(sizeof(int));
   instr->comp = str_to_compid(comp, a);
   instr->jump = str_to_jumpid(jump);
   instr->dest = str_to_destid(dest);
-  instr->a = (*a == 0) ? 0x1 : 0x0; 
-  //instr->a = *a;
+  instr->a = (*a == 0) ? 0x1 : 0x0;
 }
 
 void assemble(const char * file_name, instruction* instructions, int num_instructions) {
-  char* file_name_with_hack;
+  char* file_name_with_hack = "";
   strcpy(file_name_with_hack, file_name);
   strcat(file_name_with_hack, ".hack"); 
   FILE *fw = fopen(file_name_with_hack, "w");
@@ -184,7 +173,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
     } else if (current.instr_type == C_TYPE) {
       current_code = instruction_to_opcode(instructions->c_instr);
     }
-    printf("%c", current_code);
+    fprintf(fw, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(current_code));
     fclose(fw);
     }
 }
