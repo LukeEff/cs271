@@ -160,5 +160,13 @@ void parse_C_instruction(char *line, c_instruction *instr) {
 }
 
 void assemble(const char * file_name, instruction* instructions, int num_instructions) {
+  char* file_name_with_hack;
+  strcpy(file_name_with_hack, file_name);
+  strcat(file_name_with_hack, ".hack"); 
+  FILE *fw = fopen(file_name_with_hack, "w");
 
+  for (int i = 0; i < num_instructions; i++) {
+    
+  }
+  
 }
