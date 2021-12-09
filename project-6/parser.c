@@ -166,7 +166,24 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
   FILE *fw = fopen(file_name_with_hack, "w");
 
   for (int i = 0; i < num_instructions; i++) {
-    
-  }
+    instruction current = instructions[i];
+    opcode current_code;
+
+    if (current.a_instr.label) {
+      Symbol* entry = symtable_find(current.a_instr.label);
+      if (entry == NULL) {
+        int16_t nums = 16;
+        current_code = nums;
+      } else {
+        current_code = entry->address;
+      }
+    } else if (current.a_instr.is_addr) {
+       
+    }
+    else if (current.instr_type == C_TYPE)} {
+      
+    }
+    printf("%c", current_code);
+  
   
 }
