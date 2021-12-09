@@ -167,7 +167,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 
   for (int i = 0; i < num_instructions; i++) {
     instruction current = instructions[i];
-    opcode current_code;
+    opcode current_code = 0;
 
     if (current.a_instr.label) {
       Symbol* entry = symtable_find(current.a_instr.label);
@@ -181,9 +181,20 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
       free(current.a_instr.label);
     } else if (current.a_instr.is_addr) {
        current_code = current.a_instr.address;
-    } else if (current.instr_type == C_TYPE)} {
-      instruction_to_opcode();
+    } else if (current.instr_type == C_TYPE) {
+      current_code = instruction_to_opcode(instructions->c_instr);
     }
     printf("%c", current_code);
     fclose(fw);
+    }
+}
+
+opcode instruction_to_opcode(c_instruction instr) {
+   opcode op = 0;
+   op |= (7 << 13);
+   op |= (instr.a << 12);
+   op |= (instr.comp << 6);
+   op |= (instr.dest << 3);
+   op |= (instr.jump);
+  return op;
 }
